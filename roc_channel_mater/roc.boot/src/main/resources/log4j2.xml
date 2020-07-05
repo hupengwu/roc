@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" monitorInterval="60">
+
+	<properties>
+		<property name="logPath">/applog/roc.channel.master/logs</property>
+	</properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			<!-- <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" /> -->
+			<!-- <PatternLayout pattern="%-d [%t] %-5p %c{1}:%L - %m%n" /> -->
+		</Console>
+			
+		<RollingFile name="root" filename="${logPath}/root.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-root.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>	
+			
+    
+		<RollingFile name="root-error" filename="${logPath}/root-error.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-root-error.log">
+			<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>    
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="app" filename="${logPath}/app.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-app.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="sql" filename="${logPath}/sql.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-sql.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="jalor" filename="${logPath}/jalor.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-jalor.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		
+		<RollingFile name="workflow" filename="${logPath}/workflow.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-workflow.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="mail" filename="${logPath}/mail.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-mail.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="mail-error" filename="${logPath}/mail-error.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-mail-error.log">
+			<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/> 
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<!-- <RollingFile name="vega-core" filename="${logPath}/vega-core.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-vega-core.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile>
+		
+		<RollingFile name="vega-console" filename="${logPath}/vega-console.log"
+			filepattern="${logPath}/%d{yyyyMMdd}-%i-vega-console.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>	
+			<DefaultRolloverStrategy max="100"/>
+		</RollingFile> -->
+		
+		<!-- tracer输出文件路径配置 -->
+        <RollingFile name="app_trace" fileName="${logPath}/vega_trace.log"
+                     filePattern="${logPath}/trace/vega_trace_%d{yyyy-MM-dd}.%i.log.gz">
+            <Filters>
+                <!-- <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/> -->
+                <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS z} [%thread] %-5level %class{36}.%M()/%L - %msg%xEx%n"/>
+            <Policies>
+                <!-- 每1天更新一次 -->
+                <!-- TimeBasedTriggeringPolicy需要和filePattern配套使用，由于filePattern配置的时间最小粒度是dd天，所以表示每一天新建一个文件保存日志。-->
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <!-- 此处为每个文件大小策略限制，使用它一般会在文件中filePattern采用%i模式 -->
+                				<SizeBasedTriggeringPolicy size="100 MB"/>
+
+            </Policies>
+        </RollingFile>
+    
+	</Appenders>
+	<Loggers>
+		<Logger name="com.huawei.it.jalor5.workflow" level="info" additivity="true">
+			<AppenderRef ref="workflow"/>
+		</Logger>
+		
+		<Logger name="com.huawei.it.jalor5" level="info" additivity="true">
+			<AppenderRef ref="jalor"/>
+		</Logger>
+		
+		<Logger name="com.huawei.it" level="info" additivity="true">
+			<AppenderRef ref="app"/>
+		</Logger>
+		
+		<Logger name="JalorMail" level="info" additivity="true">
+			<AppenderRef ref="mail"/>
+			<AppenderRef ref="mail-error"/>
+		</Logger>
+		
+		<Logger name="java.sql.Connection" level="debug" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="java.sql.PreparedStatement" level="debug" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="java.sql.ResultSet" level="info" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="info" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="org.springframework.transaction.jta.WebSphereUowTransactionManager" level="info" additivity="false">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<!-- ClasspathLoggingApplicationListener 打印 classpath jar 包 -->
+		<Logger name="org.springframework.boot.logging" level="debug" additivity="false">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		
+		<Logger name="java.sql.Statement" level="debug" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="org.apache.ibatis" level="debug" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="org.mybatis.spring" level="debug" additivity="true">
+			<AppenderRef ref="sql"/>
+		</Logger>
+		
+		<Logger name="org.springframework" level="debug" additivity="true">
+		</Logger>
+		
+		<Logger name="org.apache.commons" level="debug" additivity="true">
+		</Logger>
+		
+		<Logger name="org.apache.velocity" level="info" additivity="true">
+		</Logger>
+		
+		<Logger name="org.apache.cxf.configuration.spring" level="info" additivity="true">
+		</Logger>
+		
+		<Logger name="com.opensymphony.xwork2" level="info" additivity="true">
+		</Logger>
+		
+		<Logger name="net.sf.ehcache" level="info" additivity="true">
+		</Logger>
+		
+		<Logger name="org.apache.cxf" level="info" additivity="true">
+		</Logger>
+		<Logger name="httpclient.wire" level="info" additivity="true">
+		</Logger>
+		<Logger name="org.apache.http" level="info" additivity="true">
+		</Logger>
+		<Logger name="com.amazonaws" level="info" additivity="true">
+		</Logger>
+		
+		<Logger name="com.huawei.hsa" level="info" additivity="true">
+			<AppenderRef ref="vega-core"/>
+		</Logger>
+		
+		<Logger name="com.huawei.msacore" level="info" additivity="true">
+			<AppenderRef ref="vega-console"/>
+		</Logger>
+		
+		<Logger name="org.apache.commons.httpclient.HttpMethodDirector" level="warn" additivity="true">
+		</Logger>
+		
+		<Logger name="com.huawei.it.jalor5.vega.service.JalorRestClient" level="debug" additivity="true">
+		</Logger>
+		
+		<Logger name="com.huawei.it.jalor5.vegahsa.client.rpc.annotation" level="debug" additivity="true">
+		</Logger>
+		
+		<Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="error" additivity="true">
+		</Logger>
+		
+		<Logger name="com.huawei.it.usf.client" level="debug" additivity="true">
+		</Logger>
+		
+
+		<!-- 上线时，应该将各个info改为info以上级别，并去除console的Appender -->
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="root" />
+			<AppenderRef ref="root-error" />
+		</Root>
+	</Loggers>
+</Configuration>

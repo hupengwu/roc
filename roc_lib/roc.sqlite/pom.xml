@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.huawei.roc</groupId>
+		<artifactId>roc.lib</artifactId>
+		<version>roc.lib-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>roc.lib.sqlite</artifactId>
+	<version>${project.version}</version>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- SQLite：sqlite-jdbc包 -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.21.0.1</version>
+		</dependency>
+	</dependencies>
+
+</project>

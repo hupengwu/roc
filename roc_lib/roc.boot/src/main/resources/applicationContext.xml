@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	default-lazy-init="true">    
+	
+	<beans profile="dev,sit,uat,production">
+		
+    	<!-- 模块相关的配置专用配置文件 -->
+		<import resource="classpath*:/config/*.configs.xml" />
+		
+	</beans>	
+
+	<beans profile="dev">
+		<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		    <property name="dataSource" ref="wasDataSource" />
+	 	</bean>
+	</beans>
+	
+	<beans profile="sit,uat,production">
+	 	<!-- Spring事务管理 -->
+		<bean id="txManager"  class="org.springframework.transaction.jta.JtaTransactionManager">
+		            <property name="transactionManager" ref="atomikosTransactionManager" />
+		            <property name="userTransaction" ref="atomikosUserTransaction" />
+		</bean>
+		<!-- atomikos事务管理 -->
+		<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" 
+		             init-method="init" destroy-method="close"> 
+		             <property name="forceShutdown" value="true"/>  
+		</bean> 
+		<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"> 
+		        <property name="transactionTimeout" value="300" /> 
+		</bean>  
+	</beans>
+	
+	 <!-- transaction manager, use JtaTransactionManager for global tx -->
+	<beans>
+		    
+	    <tx:annotation-driven transaction-manager="txManager"  proxy-target-class="false"/>	 	
+	     
+	    <alias name="txManager" alias="transactionManager"/>
+		<!-- the transactional advice -->
+		<tx:advice id="txAdvice" transaction-manager="txManager">
+			<tx:attributes>
+				<tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+				<tx:method name="check*" read-only="true" propagation="SUPPORTS"/>
+				<tx:method name="setSelf" read-only="true" propagation="SUPPORTS"/>
+				<!-- 定义所有异常均回滚事务 -->
+				<tx:method name="*" propagation="REQUIRED" read-only="false" timeout="120" rollback-for="java.lang.Exception" />				 
+			</tx:attributes>
+		</tx:advice>
+		
+		<!-- ensure that the above transactional advice runs for any execution
+		  of an operation defined by the Service interface -->
+		<aop:config>
+			<aop:pointcut id="transationMethod" 
+				expression="execution(* com.huawei.it..*Service.*(..)) and !@annotation(com.huawei.it.jalor5.core.annotation.NoJalorTransation)"/>
+			<aop:advisor order="100" advice-ref="txAdvice" pointcut-ref="transationMethod"/>
+		</aop:config>
+		  
+	    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	        <property name="dataSource" ref="wasDataSource" />
+	        <property name="plugins">
+	        	<list>
+					<bean id="sqlTraceInterceptor" class="com.huawei.it.jalor5.logs.sqltrace.impl.SqlTraceInterceptor"/>
+	        		<bean id="pagePlugin" class="com.huawei.it.jalor5.core.orm.PageInterceptor" />
+	        		<bean id="jalorResultSetPlugin" class="com.huawei.it.jalor5.core.orm.JalorResultSetInterceptor" />
+	        		<bean id="programPlugin" class="com.huawei.it.jalor5.core.orm.ProgramInterceptor" /> 
+	        		<bean id="connectionLogInterceptor"	class="com.huawei.it.jalor5.logs.connection.impl.DatabaseConnectionLogInterceptor"/>
+	        	</list>
+	        </property>
+	        			<property name="mapperLocations" value="classpath*:com/huawei/it/**/*Dao.mysql.xml" />
+	    </bean>  
+	    
+	 <!-- 连数据库Dao自动mapping, 从jalor5.core.beans配置移到这里    -->
+	 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="com.huawei.it.**.dao" />
+	</bean>	
+	    
+	    <!-- 普通Bean定义文件 -->
+		<import resource="classpath*:/config/*.beans.xml" />
+		<!-- 异常专用配置文件 -->
+		<import resource="classpath*:/config/*.exceptions.xml" />
+		<!-- 服务专用配置文件 -->
+		<import resource="classpath*:/config/*.services.xml" />	
+		<!-- 覆盖专用配置文件，保留用途 -->
+		<import resource="classpath*:/config/*.overrides.xml" />
+		
+    </beans>
+	
+	<beans>
+<!-- 		<context:component-scan base-package="com.huawei.it.xinsheng.comment.service.impl,com.huawei.it.xinsheng.comment.dao"/>  -->
+<!-- 	    普通Bean定义文件 -->
+<!-- 		<import resource="classpath*:/config/*.beans.xml" /> -->
+		<!-- 异常专用配置文件 -->
+<!-- 		<import resource="classpath*:/config/*.exceptions.xml" /> -->
+		<!-- 服务专用配置文件 -->
+<!-- 		<import resource="classpath*:/config/*.services.xml" />	 -->
+		
+		<!-- RPC代理配置文件 -->
+		<import resource="classpath*:/config/*.rpc.proxy.xml" />	
+		
+		<!-- 覆盖专用配置文件，保留用途 -->
+<!-- 		<import resource="classpath*:/config/*.overrides.xml" /> -->
+		<!-- dao代理 -->
+<!-- 		<import resource="classpath*:com/huawei/it/*/*/dao/*Dao.xml" /> -->
+
+    </beans>
+</beans>
+
+
+

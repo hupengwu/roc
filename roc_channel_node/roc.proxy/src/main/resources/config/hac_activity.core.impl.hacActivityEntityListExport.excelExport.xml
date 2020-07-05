@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<excel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.huawei.com/xml/ns/jalor/excel" 
+	id="roc.channel.node.core.proxy.hacActivityEntityListExport.excelExport"  fileName="hacActivityEntityListExport" > 
+	<sheet name="activityEntityList" titleRowIndex="1" dataRowIndex="2" batchSize="3000"
+		voClassName="com.huawei.it.hac.vo.HacRdActivityVO" consumerBean="IExcelDataProvider.hacActivityDataExportProvider">
+		<column displayName="zh_CN=计划来自哪个上游系统,en_US=planSource" name="计划来自哪个上游系统" type="String" fieldName="planSource"/>
+		<column displayName="zh_CN=计划id,en_US=planId" name="计划id" type="String" fieldName="planId"/>
+		<column displayName="zh_CN=活动主题,en_US=subject" name="活动主题" type="String" fieldName="subject"/>
+		<column displayName="zh_CN=活动纪要,en_US=summary" name="活动纪要" type="String" fieldName="summary"/>
+		<column displayName="zh_CN=客户ID,en_US=bpId" name="客户ID" type="String" fieldName="bpId"/>
+		<column displayName="zh_CN=活动日期,en_US=activityDate" name="活动日期" type="String" fieldName="activityDate"/>
+		<column displayName="zh_CN=活动地点,en_US=place" name="活动地点" type="String" fieldName="place"/>
+		<column displayName="zh_CN=活动类型-值集配置国际化,en_US=type" name="活动类型-值集配置国际化" type="String" fieldName="type"/>
+		<column displayName="zh_CN=联合合作伙伴编码,en_US=partnerAccountNumber" name="联合合作伙伴编码" type="String" fieldName="partnerAccountNumber"/>
+		<column displayName="zh_CN=联合合作伙伴名称,en_US=partnerAccountName" name="联合合作伙伴名称" type="String" fieldName="partnerAccountName"/>
+		<column displayName="zh_CN=失效标识,en_US=inactiveFlag" name="失效标识" type="String" fieldName="inactiveFlag"/>
+		<column displayName="zh_CN=创建日期,en_US=creationDate" name="创建日期" type="String" fieldName="creationDate"/>
+		<column displayName="zh_CN=创建人,en_US=createdBy" name="创建人" type="String" fieldName="createdBy"/>
+		
+		
+	</sheet>
+</excel>

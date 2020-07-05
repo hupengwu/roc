@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.huawei.roc</groupId>
+		<artifactId>roc.lib</artifactId>
+		<version>roc.lib-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>roc.lib.serialport</artifactId>
+	<version>${project.version}</version>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- 串口通信：RXTXcomm包 -->
+		<dependency>
+			<groupId>org.rxtx.RXTXcomm</groupId>
+			<artifactId>RXTXcomm</artifactId>
+			<version>4.6.1</version>
+		</dependency>
+	</dependencies>
+
+</project>

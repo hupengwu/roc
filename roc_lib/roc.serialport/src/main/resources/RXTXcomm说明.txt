@@ -1,0 +1,22 @@
+1、下载第三方jar包
+    到官网上http://fizzed.com/oss/rxtx-for-java下载RXTXcomm.jar
+2、前提：已经安装好maven
+	使用maven指令安装入本地仓库：
+	首先，使用cmd窗口，cd进入jar包的存放目录，使用以下指令：
+	mvn install:install-file -Dfile=RXTXcomm.jar -DgroupId=org.rxtx.RXTXcomm -DartifactId=RXTXcomm -Dversion=4.6.1 -Dpackaging=jar 
+3、添加pom.xml,引用jar包
+	<dependency>
+		<groupId>org.rxtx.RXTXcomm</groupId>
+  		<artifactId>RXTXcomm</artifactId>
+ 	<version>4.6.1</version>
+    </dependency>
+4、问题：包已经安装入本地仓库，为什么项目不能引用？
+	答：查看项目使用的maven setting.xml是否正确
+	
+内含32位与64位版本
+使用方法如下：
+拷贝 RXTXcomm.jar 到 <JAVA_HOME>\jre\lib\ext目录中； 
+拷贝 rxtxSerial.dll 到 <JAVA_HOME>\jre\bin目录中； 
+拷贝 rxtxParallel.dll 到 <JAVA_HOME>\jre\bin目录中； 
+<JAVA_HOME>为jdk安装路径
+

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+  
+  	<!--应用名和Scope配置，请谨慎修改此配置，修改后需要重新初始化数据库-->
+    <bean id="applicationPrincipal" class="com.huawei.it.jalor5.core.request.impl.Application">
+		<property name="appName" value="${application.appName}" />
+		<property name="scope" value="${application.scope}" />
+		<property name="dbType" value="${application.dbType}" />
+		<property name="serviceVersion" value="${application.serviceVersion}"  />
+	</bean>	
+	
+	
+	<!--邮件配置，请注意修改下面的fromAddress和fromName,systemAdminAddress，templateHtmlCategory不要修改-->
+  	<bean id="mailConfig" class="com.huawei.it.jalor5.mail.service.impl.internal.MailConfigBean">
+		<property name="fromAddress">
+			<value>jalor5@huawei.com</value>
+		</property>
+		<property name="systemAdminAddress">
+			<value>jalor5@huawei.com</value>
+		</property>
+		<property name="fromName">
+			<value>Jalor5 - Web 2.0 and SOA Framework</value>
+		</property>
+		<property name="templateHtmlCategory">
+			<value>MailTemplate</value>
+		</property>
+	</bean>
+</beans>
+

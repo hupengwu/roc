@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+	name="cache" updateCheck="false" monitoring="off"
+	dynamicConfig="false">
+
+    <cache name="ApplicationCfg"
+		maxElementsInMemory="5000"
+		maxElementsOnDisk="5000"
+		overflowToDisk="true"
+		eternal="false"		
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<cache name="ServiceType"
+		maxElementsInMemory="5000"
+		maxElementsOnDisk="5000"
+		overflowToDisk="true"
+		eternal="false"		
+		memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="RetryPolicy"
+		maxElementsInMemory="5000"
+		maxElementsOnDisk="5000"
+		overflowToDisk="true"
+		eternal="false"		
+		memoryStoreEvictionPolicy="LRU"
+	/>
+
+</ehcache>

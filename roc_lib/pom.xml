@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.huawei.roc</groupId>
+	<artifactId>roc.lib</artifactId>
+	<version>roc.lib-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.version>1.0.0-SNAPSHOT</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+	</dependencies>
+
+	<modules>
+		<module>roc.boot</module>
+		<module>roc.lombok</module>
+		<module>roc.cipher</module>
+		<module>roc.niosocket</module>
+		<module>roc.iosocket</module>
+		<module>roc.litetask</module>
+		<module>roc.log</module>
+		<module>roc.utils</module>
+		<module>roc.http</module>
+		<module>roc.value</module>
+		<module>roc.annotation</module>
+		<module>roc.javacompiler</module>
+		<module>roc.safecollection</module>
+		<module>roc.keyvaluemapper</module>
+		<module>roc.serialport</module>
+		<module>roc.restlike</module>
+		<module>roc.timertask</module>
+		<module>roc.ssl</module>
+		<module>roc.sqlite</module>
+		<module>roc.mybatis</module>	
+		<module>roc.protocol</module>		
+	</modules>
+</project>
