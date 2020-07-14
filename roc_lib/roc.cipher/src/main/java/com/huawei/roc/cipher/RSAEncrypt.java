@@ -17,13 +17,12 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * https://www.cnblogs.com/demodashi/p/8458113.html
@@ -67,9 +66,9 @@ public class RSAEncrypt {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         try {
             // 得到公钥字符串
-            String publicKeyString = Base64.encodeBase64String(publicKey.getEncoded());
+            String publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
             // 得到私钥字符串
-            String privateKeyString = Base64.encodeBase64String(privateKey.getEncoded());
+            String privateKeyString = Base64.getEncoder().encodeToString(privateKey.getEncoded());
             // 将密钥对写入到文件
             FileWriter pubfw = new FileWriter(filePath + "/" + publicKeyFileName + ".keystore");
             FileWriter prifw = new FileWriter(filePath + "/" + privateKeyFileName + ".keystore");
@@ -123,7 +122,7 @@ public class RSAEncrypt {
      */
     public static RSAPublicKey loadPublicKeyByStr(String publicKeyStr) throws Exception {
         try {
-            byte[] buffer = Base64.decodeBase64(publicKeyStr);
+            byte[] buffer = Base64.getDecoder().decode(publicKeyStr);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(buffer);
             return (RSAPublicKey) keyFactory.generatePublic(keySpec);
@@ -163,7 +162,7 @@ public class RSAEncrypt {
 
     public static RSAPrivateKey loadPrivateKeyByStr(String privateKeyStr) throws Exception {
         try {
-            byte[] buffer = Base64.decodeBase64(privateKeyStr);
+            byte[] buffer = Base64.getDecoder().decode(privateKeyStr);
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(buffer);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);

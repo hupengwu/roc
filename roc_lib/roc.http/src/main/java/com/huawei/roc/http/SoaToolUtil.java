@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.ws.rs.HttpMethod;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -77,7 +76,7 @@ public class SoaToolUtil {
                 String value = (String) paramMap.get(key);
                 paramStr = key + "=" + value + "&";
             }
-            if (!StringUtils.isEmpty(paramStr)) {
+            if (!isEmpty(paramStr)) {
                 paramStr = paramStr.substring(0, paramStr.length() - 1);// 去掉最后一个&
             }
             URL = URL + "?" + paramStr;
@@ -182,7 +181,7 @@ public class SoaToolUtil {
                     paramStr = paramStr + "&" + key + "=" + value;
                 }
             }
-            if (StringUtils.isNotEmpty(paramStr)) {
+            if (!isEmpty(paramStr)) {
                 paramStr = paramStr.substring(1);// 去掉最开始一个&
             }
             URL = URL + "?" + paramStr;
@@ -314,5 +313,15 @@ public class SoaToolUtil {
         buildClient.readTimeout(120, TimeUnit.SECONDS);
         OkHttpClient okHttpClient = buildClient.build();
         return okHttpClient;
+    }
+    
+    /**
+     * 判断是否为空
+     * 
+     * @param str
+     * @return
+     */
+    private static boolean isEmpty( final String str ) {
+        return (str == null) || (str.length() == 0);
     }
 }

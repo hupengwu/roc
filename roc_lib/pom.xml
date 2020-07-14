@@ -37,7 +37,6 @@
 		<module>roc.javacompiler</module>
 		<module>roc.safecollection</module>
 		<module>roc.keyvaluemapper</module>
-		<module>roc.serialport</module>
 		<module>roc.restlike</module>
 		<module>roc.timertask</module>
 		<module>roc.ssl</module>

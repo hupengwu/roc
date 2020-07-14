@@ -2,6 +2,7 @@
 package com.huawei.roc.lombok;
 
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * https://www.cnblogs.com/heyonggang/p/8638374.html
@@ -10,8 +11,10 @@ import lombok.Data;
  */
 @Data
 public class DataDemo {
+   // @Getter
     private String name = "a";
 
+  //  @Getter
     private String[] tags;
 
     public static void main(String[] args) throws Exception {
