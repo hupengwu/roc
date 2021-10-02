@@ -42,6 +42,9 @@
 		<module>roc.ssl</module>
 		<module>roc.sqlite</module>
 		<module>roc.mybatis</module>	
-		<module>roc.protocol</module>		
+		<module>roc.protocol</module>	
+		<!--module>roc.ssh2</module -->
+		<!--module>roc.snmp4j</module -->
+		<!-- module>roc.serialport</module -->	
 	</modules>
 </project>
